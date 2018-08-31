@@ -1,0 +1,51 @@
+
+  body {
+
+    font-size: 20px;
+  }
+
+  .letter.show {
+    background: green;
+  }
+
+  .letter.hide {
+    background: red;
+  }
+
+  button.key {
+    opacity: 0.5;
+    padding: 10px;
+    height: 50px;
+    width: 50px;
+    font-size: 20px;
+    margin: 20px 10px 0 0;
+    background: #001b2c;
+    color: white;
+    text-transform: uppercase;
+  }
+
+  button.key.active {
+    opacity: 1;
+  }
+
+  #score {
+  height: 50px;
+  }
+  #score #rights {
+    border: 1px solid darkgreen;
+    color: darkgreen;
+    width: 50px;
+    height: 50px;
+    float: right;
+    font-size: 20px;
+  }
+
+  #score #wrongs {
+    border: 1px solid red;
+    color: red;
+    width: 50px;
+    height: 50px;
+    float: right;
+    margin-right: 10px;
+    font-size: 20px;
+  }
