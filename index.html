@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>English Live Desafio</title>
+    <style type="text/css">
+    body {
+
+      font-size: 20px;
+    }
+      .letter.show {
+        background: green;
+      }
+      .letter.hide {
+        background: red;
+      }
+
+      button.tecla {
+        opacity: 0.5;
+        padding: 10px;
+        height: 50px;
+        width: 50px;
+        font-size: 20px;
+        margin: 20px 10px 0 0;
+        background: #001b2c;
+        color: white;
+        text-transform: uppercase;
+      }
+
+      button.tecla.ativa {
+        opacity: 1;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="frase"></div>
+    <div id="letras"></div>
+    <div id="letterboard"></div>
+    <div id="keyboard"></div>
+    <div id="keypad"></div>
+  </body>
+  <script type="text/javascript" src="./res/js/frases.js"></script>
+  <script type="text/javascript" src="./res/js/jquery-3.3.1.min.js"></script>
+  <script type="text/javascript">
+    function randomFrase() {
+      fraseid = Math.floor(Math.random() * 6) + 1;
+      frase = frases[fraseid].frase;
+      return frase;
+    }
+
+    function getPalavra(frase) {
+      palavra = frase.match(/\[(.*?)\]/);
+      return palavra[1];
+    }
+
+    function getLetras(palavra) {
+      letras = palavra.substring(1, (palavra.length - 1));
+      return letras;
+    }
+
+    function ocultaPalavra(palavra, letras) {
+        html = "";
+        for (var i = 0; i < letras.length; i++) {
+          html += ' <span class="letter hide" id="letter'+i+'">'+letras.charAt(i)+'</span>';
+        }
+       palavraoculta = palavra.replace(letras, html);
+       return palavraoculta;
+    }
+
+    function mostraFrase(frase, palavraOculta, palavra) {
+      document.getElementById("frase").innerHTML = frase.replace(palavra, palavraoculta).replace(/[\[\]']+/g, '');
+    }
+
+    function embaralhaLetras(letras) {
+      return letras.split('').sort(function() {
+        return 0.5 - Math.random()
+      }).join('');
+    }
+
+    function mostraLetras(letras) {
+      document.getElementById("letras").innerHTML = letras;
+    }
+
+    function montaTeclado(letras, divid) {
+      $('#'+divid).empty();
+      for (var i = 0; i < letras.length; i++) {
+        montarBotao(letras.charAt(i), i, divid);
+      }
+    }
+
+    function montarBotao(tecla, contador, divid) {
+      $('#'+divid).append('<button id="tecla-'+tecla+'" class="tecla ativa tecla' +contador+'" value="'+tecla+'" >'+tecla+'</button>');
+    }
+
+    var ultimaLetraCerta = 0;
+    function verificaPalavra(tecla) {
+      letra = tecla.value;
+      if ($(".letter.hide").text()[0] == letra) {
+        letraId = $(".letter.hide").attr('id');
+        $("#"+letraId).removeClass("hide");
+        $("#"+letraId).addClass("show");
+        $(tecla).removeClass("ativa").prop("disabled",true);
+        if ($(".letter.hide").length == 0) {
+          alert("AE Carai!");
+          iniciaJogo();
+        }
+      }
+    }
+    var palavra;
+
+    function iniciaJogo() {
+      frase = randomFrase();
+      palavra = getPalavra(frase);
+      letras = getLetras(palavra);
+      letrasEmbaralhadas = embaralhaLetras(letras);
+      palavraOculta = ocultaPalavra(palavra, letras);
+      mostraFrase(frase, palavraOculta, palavra);
+      montaTeclado(letrasEmbaralhadas, "letterboard");
+      $("#letterboard button").click(function(event) {
+        verificaPalavra(this);
+      });
+    }
+
+    function mostrarTecladoCompleto() {
+      keyboard = "qwertyuiopasdfghjkl_-zxcvbnm.@";
+      montaTeclado(keyboard, "keyboard");
+      keyboard = "1234567890+";
+      montaTeclado(keyboard, "keypad");
+    }
+
+    window.onload = function() {
+      iniciaJogo();
+      //mostrarTecladoCompleto();
+    }
+  </script>
+
+</html>
