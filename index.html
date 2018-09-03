@@ -9,12 +9,42 @@
   </head>
 
   <body>
+    <header>
+      <img src="./res/img/logo.png" alt="EF / English Live" class="logo">
+    </header>
+
     <section id="home">
       HOME
     </section>
+
     <section id="lead">
-      LEAD
+      <h2>Insira seus dados para começar</h2>
+      <div class="form">
+        <form id="leadForm">
+          <input type="text" class="field" placeholder="Nome Completo" id="nome" name="nome">
+          <input type="text" class="field" placeholder="Telefone (com DDD)" id="fone" name="fone">
+          <input type="text" class="field" placeholder="E-Mail" id="email" name="email">
+          <label for="optin">
+            Maior de 18 anos
+            <input type="radio" class="radio" value="maior18" name="idade" checked="checked">
+          </label>
+          <label for="optin">
+            Menor de 18 anos
+            <input type="radio" class="radio" value="menor18" name="idade">
+          </label>
+          <input type="submit" class="btn btn-primary btn-submit" value="Iniciar" name="submit">
+          <label for="optin">
+            <input type="checkbox" id="optin" value="receber" name="optin" checked="checked">
+            SIM, quero receber ofertas, sms e uma consultoria sobre a escola.
+          </label>
+        </form>
+      </div>
+      <div class="keyboard">
+        <div id="keyboard"></div>
+        <div id="keypad"></div>
+      </div>
     </section>
+
     <section id="game">
       <div id="quote"></div>
       <div id="letters"></div>
@@ -25,15 +55,39 @@
         <div id="rights"></div>
         <div id="wrongs"></div>
       </div>
-      <div id="keyboard"></div>
-      <div id="keypad"></div>
-
+      <div id="letterboard"></div>
     </section>
+
     <section id="result">
+      <div class="final noob">
+        <img src="" alt="" class="result">
+        <p class="result">
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        </p>
+      </div>
+      <div class="final gamer">
+        <img src="" alt="" class="result">
+        <p class="result">
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        </p>
+      </div>
+      <div class="final hard">
+        <img src="" alt="" class="result">
+        <p class="result">
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        </p>
+      </div>
     </section>
   </body>
   <script type="text/javascript" src="./res/js/quotes.js"></script>
   <script type="text/javascript" src="./res/js/jquery-3.3.1.min.js"></script>
   <script type="text/javascript" src="./res/js/ojogo.js"></script>
+  <script type="text/javascript" src="./res/js/utils.js"></script>
+
+  <script type="text/javascript">
+    $.post("http://www.englishlivebrasil.com.br/games/bgs2018/api/", $('#leadForm').serialize(), function(data) {
+      console.log(data);
+    });
+  </script>
 
 </html>

@@ -7,7 +7,7 @@
   var rightAnswers = 0;
   var wrongAnswers = 0;
   var maxTurns = 5;
-  var maxTime = 5;
+  var maxTime = 10;
 
   function randomQuote() {
     quotesCount = quotes.length;
@@ -57,16 +57,6 @@
     document.getElementById("letters").innerHTML = letters;
   }
 
-  function makeKeyboard(letters, divid) {
-    $('#' + divid).empty();
-    for (var i = 0; i < letters.length; i++) {
-      makeKey(letters.charAt(i), i, divid);
-    }
-  }
-
-  function makeKey(key, counter, divid) {
-    $('#' + divid).append('<button id="key-' + key + '" class="key active key' + counter + '" value="' + key + '" >' + key + '</button>');
-  }
 
   function checkWord(key) {
     if ($(".letter.hide").text()[0] == key.value) {
@@ -93,7 +83,7 @@
   function makeVisual(quote, hiddenWord, word, quoteObj, shuffledLetters) {
     showQuote(quote, hiddenWord, word);
     showData(quoteObj);
-    makeKeyboard(shuffledLetters, "keyboard");
+    makeKeyboard(shuffledLetters, "letterboard");
   }
 
   function prepareGame() {
@@ -140,21 +130,13 @@
   }
 
   function iniciaJogo() {
-    $("#keyboard button").click(function(event) {
+    $("#letterboard button").click(function(event) {
       checkWord(this);
     });
     var gameTime = maxTime;
     startCounter(gameTime);
   }
 
-  function showrTecladoCompleto() {
-    keyboard = "qwertyuiopasdfghjkl_-zxcvbnm.@";
-    makeKeyboard(keyboard, "keyboard");
-    keyboard = "1234567890+";
-    makeKeyboard(keyboard, "keypad");
-  }
-
   window.onload = function() {
     newTurn();
-    //showrTecladoCompleto();
   }

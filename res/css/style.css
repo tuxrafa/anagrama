@@ -28,6 +28,11 @@
     opacity: 1;
   }
 
+  button.key#key-space,
+  button.key#key-backspace {
+  width: auto;important;
+  }
+
   #score {
   height: 50px;
   }
