@@ -1,56 +1,184 @@
+body {
+  background: url("../img/background.jpeg") 50% 0;
+  font-size: 20px;
+  margin: 0;
+  padding: 0;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
 
-  body {
+header {
+  position: fixed;
+  top: 0;
+  height: 100px;
+  width: 100%;
+  text-align: center;
+  padding-top: 58px;
+}
 
-    font-size: 20px;
-  }
+section {
+  padding-top: 160px;
+  height: 1760px;
+  width: 1080px;
+  display: block;
+  margin: auto;
+}
 
-  .letter.show {
-    background: green;
-  }
+section#home {
+  text-align: center;
+  box-shadow: 0px 1000px 50px 1px rgb(0, 0, 0), 0px 1000px 1500px 50px rgb(0, 0, 0);
+}
 
-  .letter.hide {
-    background: red;
-  }
 
-  button.key {
-    opacity: 0.5;
-    padding: 10px;
-    height: 50px;
-    width: 50px;
-    font-size: 20px;
-    margin: 20px 10px 0 0;
-    background: #001b2c;
-    color: white;
-    text-transform: uppercase;
-  }
+section#result {
+  text-align: center;
+  box-shadow: 0px -1000px 50px 1px rgb(0, 0, 0), 0px -1000px 1500px 50px rgb(0, 0, 0);
+}
 
-  button.key.active {
-    opacity: 1;
-  }
+.final.noob.hide, .final.gamer.hide, .final.hard.hide {
+  display: none;
+}
 
-  button.key#key-space,
-  button.key#key-backspace {
-  width: auto;important;
-  }
+.keyboard .key {
+  width: 51px;
+  height: 68px;
+  font-size: 20px;
+  margin: 20px 10px 0 0;
+  border: 0 none;
+  outline: 0 none;
+  background: url("../img/key-letter.png") no-repeat;
+}
 
-  #score {
+#letterboard .key {
+  width: 117px;
+  height: 152px;
+  font-size: 20px;
+  margin: 20px 10px 0 0;
+  border: 0 none;
+  outline: 0 none;
+  background: url("../img/key-game.png") no-repeat;
+}
+
+.key.active:active {
+  opacity: 0.8;
+  border: 1px solid transparent;
+}
+
+.letter.show {
+  background: green;
+}
+
+.letter.hide {
+  background: red;
+}
+
+button.key {
+  opacity: 0.5;
+  color: white;
+  text-transform: uppercase;
+}
+
+button.key.active {
+  opacity: 1;
+}
+
+button.key#key-space, button.key#key-backspace {
+  width: auto;
+  important;
+}
+
+#score {
   height: 50px;
-  }
-  #score #rights {
-    border: 1px solid darkgreen;
-    color: darkgreen;
-    width: 50px;
-    height: 50px;
-    float: right;
-    font-size: 20px;
-  }
+}
 
-  #score #wrongs {
-    border: 1px solid red;
-    color: red;
-    width: 50px;
-    height: 50px;
-    float: right;
-    margin-right: 10px;
-    font-size: 20px;
+#score #rights {
+  border: 1px solid darkgreen;
+  color: darkgreen;
+  width: 50px;
+  height: 50px;
+  float: right;
+  font-size: 20px;
+}
+
+#score #wrongs {
+  border: 1px solid red;
+  color: red;
+  width: 50px;
+  height: 50px;
+  float: right;
+  margin-right: 10px;
+  font-size: 20px;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
   }
+  50% {
+    transform: scale(0.8);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+#numberCountdown {
+    text-align: center;
+    margin-top: 56px;
+    color: #fff;
+    font-size: 1.0em;
+    font-family: sans-serif;
+    text-transform: uppercase;
+}
+
+.pulse {
+  animation-name: pulse;
+  animation-duration: 1s;
+  animation-fill-mode: both;
+  animation-iteration-count: infinite;
+}
+
+img.gamelogo {
+    margin: 144px auto -201px auto;
+}
+
+img.btnstart {
+    margin: 0 auto 0 auto;
+}
+
+h2 {
+    font-family: "Roboto Condensed", sans-serif;
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 72px;
+    max-width: 650px;
+    margin: 69px auto 0;
+    line-height: 71px;
+    color: white;
+    letter-spacing: 0.6px;
+}
+form#leadForm input {
+    width: 684px;
+    margin: 0 auto 24px;
+    border: 3px solid #002e40;
+    background: #000f16;
+    color: white;
+    height: 60px;
+    font-size: 30px;
+    padding: 19px 38px;
+    font-family: "Roboto Condensed";
+    text-transform: uppercase;
+    font-weight: 300;
+    outline: 0 none;
+}
+
+form#leadForm input:focus {
+    border: 3px solid #66c2f3;
+    box-shadow: 0 0px 50px 1px rgba(255, 255, 255, 0.2);
+}
+
+form#leadForm {
+    margin: 62px auto 0 auto;
+    max-width: 764px;
+    /* background: red; */
+}

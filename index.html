@@ -1,29 +1,63 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
-
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
     <title>English Live Desafio</title>
+    <link rel="stylesheet" href="./res/fonts/robotoCondensed/robotoCondensed.css">
     <link rel="stylesheet" href="./res/css/style.css">
   </head>
 
   <body>
     <header>
-      <img src="./res/img/logo.png" alt="EF / English Live" class="logo">
+      <img src="./res/img/english-live.png" alt="EF English Live" class="logo">
     </header>
 
-    <section id="home">
-      HOME
+    <section id="result">
+      <div class="final noob hide">
+        <img src="./res/img/winner-noob.png" alt="N00B" class="result">
+        <p class="resultText">
+          Sorry, você acertou menos de três…<br>
+          Precisa treinar mais - nos games e no inglês!
+        </p>
+      </div>
+      <div class="final gamer hide">
+        <img src="./res/img/winner-gamer.png" alt="G4M3R" class="result">
+        <p class="resultText">
+          Congrats! Você acertou 3 ou mais frases, é um gamer mesmo.<br>
+          Pegue seu prêmio.
+        </p>
+      </div>
+      <div class="final hard hide">
+        <img src="./res/img/winner-level-hard.png" alt="XP" class="result">
+        <p class="resultText">
+          Amazing! Acertou todas!<br>
+          Não tem troféu de platina, mas tem prêmio, e nossa admiração!
+        </p>
+      </div>
+    </section>
+
+    <section id="game">
+      <div id="quote"></div>
+      <div id="letters"></div>
+      <div id="numberCountdown" class=""></div>
+      <div id="title"></div>
+      <div id="producer"></div>
+      <div id="score">
+        <div id="rights"></div>
+        <div id="wrongs"></div>
+      </div>
+      <div id="letterboard"></div>
     </section>
 
     <section id="lead">
-      <h2>Insira seus dados para começar</h2>
+      <h2>Insira seus dados para começar.</h2>
       <div class="form">
         <form id="leadForm">
-          <input type="text" class="field" placeholder="Nome Completo" id="nome" name="nome">
-          <input type="text" class="field" placeholder="Telefone (com DDD)" id="fone" name="fone">
-          <input type="text" class="field" placeholder="E-Mail" id="email" name="email">
+          <input type="text" autocomplete="off" class="field" placeholder="Nome Completo" id="nome" name="nome">
+          <input type="text" autocomplete="off" class="field" placeholder="Telefone (com DDD)" id="fone" name="fone">
+          <input type="text" autocomplete="off" class="field" placeholder="E-Mail" id="email" name="email">
+          <div class="vocee">Você é:</div>
           <label for="optin">
             Maior de 18 anos
             <input type="radio" class="radio" value="maior18" name="idade" checked="checked">
@@ -38,6 +72,16 @@
             SIM, quero receber ofertas, sms e uma consultoria sobre a escola.
           </label>
         </form>
+        <div class="hide emailhelper">
+          <ul class="emailoptions">
+            <li class="emailoption">@gmail.com</li>
+            <li class="emailoption">@hotmail.com</li>
+            <li class="emailoption">@outlook.com</li>
+            <li class="emailoption">@icloud.com</li>
+            <li class="emailoption">@yahoo.com</li>
+            <li class="emailoption">@yahoo.com.br</li>
+          </ul>
+        </div>
       </div>
       <div class="keyboard">
         <div id="keyboard"></div>
@@ -45,40 +89,13 @@
       </div>
     </section>
 
-    <section id="game">
-      <div id="quote"></div>
-      <div id="letters"></div>
-      <div id="numberCountdown"></div>
-      <div id="title"></div>
-      <div id="producer"></div>
-      <div id="score">
-        <div id="rights"></div>
-        <div id="wrongs"></div>
-      </div>
-      <div id="letterboard"></div>
+    <section id="home">
+      <img class="gamelogo" src="./res/img/words-challenge.png" alt="Words Challenge">
+      <img class="btnstart" src="./res/img/start.png" alt="Start">
     </section>
 
-    <section id="result">
-      <div class="final noob">
-        <img src="" alt="" class="result">
-        <p class="result">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-        </p>
-      </div>
-      <div class="final gamer">
-        <img src="" alt="" class="result">
-        <p class="result">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-        </p>
-      </div>
-      <div class="final hard">
-        <img src="" alt="" class="result">
-        <p class="result">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-        </p>
-      </div>
-    </section>
   </body>
+
   <script type="text/javascript" src="./res/js/quotes.js"></script>
   <script type="text/javascript" src="./res/js/jquery-3.3.1.min.js"></script>
   <script type="text/javascript" src="./res/js/ojogo.js"></script>
@@ -88,6 +105,28 @@
     $.post("http://www.englishlivebrasil.com.br/games/bgs2018/api/", $('#leadForm').serialize(), function(data) {
       console.log(data);
     });
+
+    window.onload = function() {
+
+      $("#leadForm input.field").click(function(event) {
+        fieldFocus = this.id;
+      });
+
+      showTecladoCompleto();
+      scrollToSection("home");
+
+      $(".btnstart").click(function() {
+        scrollToSection("lead");
+      });
+
+
+      $("form#leadForm").submit(function(e) {
+        e.preventDefault();
+        scrollToSection("game");
+        newTurn();
+      });
+
+    }
   </script>
 
 </html>

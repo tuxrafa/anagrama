@@ -7,7 +7,8 @@
   var rightAnswers = 0;
   var wrongAnswers = 0;
   var maxTurns = 5;
-  var maxTime = 10;
+  var maxTime = 15;
+  var fieldFocus = "nome";
 
   function randomQuote() {
     quotesCount = quotes.length;
@@ -70,8 +71,7 @@
 
   function rightKey(key) {
     letterId = $(".letter.hide").attr('id');
-    $("#" + letterId).removeClass("hide");
-    $("#" + letterId).addClass("show");
+    $("#" + letterId).removeClass("hide").addClass("show");
     $(key).removeClass("active").prop("disabled", true);
   }
 
@@ -100,11 +100,17 @@
     window.clearTimeout(counter);
     if ((gameTime - 1) >= 0) {
       gameTime = gameTime - 1;
-      if (gameTime > 9) preNumber = '00:'; else preNumber = '00:0';
+      if (gameTime > 9)
+        preNumber = '00:';
+      else {
+        preNumber = '00:0';
+        $("#numberCountdown").addClass("pulse");
+      }
       numberCountdown.innerText = preNumber + gameTime;
       counter = setTimeout(function(){startCounter(gameTime)}, 1000);
     } else {
       marcaErro();
+      $("#numberCountdown").removeClass("pulse");
       newTurn();
     }
   }
@@ -123,20 +129,33 @@
     if (turns < maxTurns) {
       turns++;
       prepareGame();
-      iniciaJogo();
+      gameStart();
     } else {
-      console.log("Game Over");
+      gameOver();
     }
   }
 
-  function iniciaJogo() {
+  function gameOver() {
+    $("#letterboard button").removeClass("active").prop("disabled", true);
+    scrollToSection("result");
+    switch (true) {
+      case rightAnswers<3:
+        $("#result .final.noob").removeClass("hide");
+        break;
+      case rightAnswers<5:
+        $("#result .final.gamer").removeClass("hide");
+        break;
+      default:
+        $("#result .final.hard").removeClass("hide");
+
+    }
+  }
+
+
+  function gameStart() {
     $("#letterboard button").click(function(event) {
       checkWord(this);
     });
     var gameTime = maxTime;
     startCounter(gameTime);
-  }
-
-  window.onload = function() {
-    newTurn();
   }
