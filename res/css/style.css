@@ -449,3 +449,7 @@ section#result {
   max-width: 70%;
   margin: 105px auto 0 auto;
 }
+
+section#result img.restart {
+    margin-top: 150px;
+}
