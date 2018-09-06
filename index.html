@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
+
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
@@ -17,62 +18,61 @@
       <div class="final noob hide">
         <img src="./res/img/winner-noob.png" alt="N00B" class="result">
         <p class="resultText">
-          Sorry, você acertou menos de três…<br>
-          Precisa treinar mais - nos games e no inglês!
+          Sorry, você acertou menos de três…<br> Precisa treinar mais - nos games <br>e no inglês!
         </p>
       </div>
       <div class="final gamer hide">
         <img src="./res/img/winner-gamer.png" alt="G4M3R" class="result">
         <p class="resultText">
-          Congrats! Você acertou 3 ou mais frases, é um gamer mesmo.<br>
-          Pegue seu prêmio.
+          Congrats! Você acertou 3 ou<br> mais frases, é um gamer mesmo.<br> Pegue seu prêmio.
         </p>
       </div>
       <div class="final hard hide">
         <img src="./res/img/winner-level-hard.png" alt="XP" class="result">
         <p class="resultText">
-          Amazing! Acertou todas!<br>
-          Não tem troféu de platina, mas tem prêmio, e nossa admiração!
+          Amazing! Acertou todas!<br> Não tem troféu de platina, mas<br> tem prêmio, e nossa admiração!
         </p>
       </div>
     </section>
 
     <section id="game">
+      <img src="./res/img/info.png" alt="" class="info">
+      <div id="level"></div>
       <div id="quote"></div>
-      <div id="letters"></div>
-      <div id="numberCountdown" class=""></div>
       <div id="title"></div>
       <div id="producer"></div>
-      <div id="score">
-        <div id="rights"></div>
-        <div id="wrongs"></div>
-      </div>
+      <div id="letters"></div>
       <div id="letterboard"></div>
+      <div id="numberCountdown" class=""></div>
+      <div id="score">
+        <div id="rights">0</div>
+        <div id="wrongs">0</div>
+      </div>
     </section>
 
     <section id="lead">
       <h2>Insira seus dados para começar.</h2>
       <div class="form">
         <form id="leadForm">
-          <input type="text" autocomplete="off" class="field" placeholder="Nome Completo" id="nome" name="nome">
-          <input type="text" autocomplete="off" class="field" placeholder="Telefone (com DDD)" id="fone" name="fone">
-          <input type="text" autocomplete="off" class="field" placeholder="E-Mail" id="email" name="email">
-          <div class="vocee">Você é:</div>
-          <label for="optin">
+          <input type="text" required="required" autocomplete="off" class="field" placeholder="Nome Completo" id="nome" name="nome">
+          <input type="text" required="required" autocomplete="off" class="field" placeholder="Telefone (com DDD)" id="fone" name="fone">
+          <input type="email" required="required" autocomplete="off" class="field" placeholder="E-Mail" id="email" name="email">
+          <img src="./res/img/vocee.png" alt="Você é:" class="vocee">
+          <input type="radio" id="maior18" class="radio" value="maior18" name="idade" checked="checked">
+          <label id="lblmaior18" for="maior18">
             Maior de 18 anos
-            <input type="radio" class="radio" value="maior18" name="idade" checked="checked">
           </label>
-          <label for="optin">
+          <input type="radio" id="menor18" class="radio" value="menor18" name="idade">
+          <label id="lblmenor18" for="menor18">
             Menor de 18 anos
-            <input type="radio" class="radio" value="menor18" name="idade">
           </label>
-          <input type="submit" class="btn btn-primary btn-submit" value="Iniciar" name="submit">
-          <label for="optin">
-            <input type="checkbox" id="optin" value="receber" name="optin" checked="checked">
+          <input type="submit" class="btn btn-primary btn-submit" value="" name="submit">
+          <input type="checkbox" id="optin" value="receber" name="optin" checked="checked">
+          <label id="lbloptin" for="optin">
             SIM, quero receber ofertas, sms e uma consultoria sobre a escola.
           </label>
         </form>
-        <div class="hide emailhelper">
+        <div id="emailDomains" class="hide emailhelper">
           <ul class="emailoptions">
             <li class="emailoption">@gmail.com</li>
             <li class="emailoption">@hotmail.com</li>
@@ -100,32 +100,60 @@
   <script type="text/javascript" src="./res/js/jquery-3.3.1.min.js"></script>
   <script type="text/javascript" src="./res/js/ojogo.js"></script>
   <script type="text/javascript" src="./res/js/utils.js"></script>
+  <script type="text/javascript" src="./res/js/mask.min.js"></script>
 
   <script type="text/javascript">
-    $.post("http://www.englishlivebrasil.com.br/games/bgs2018/api/", $('#leadForm').serialize(), function(data) {
-      console.log(data);
-    });
-
     window.onload = function() {
 
       $("#leadForm input.field").click(function(event) {
         fieldFocus = this.id;
       });
 
-      showTecladoCompleto();
-      scrollToSection("home");
+      $("#leadForm #email").on('change', function() {
+        if ($("#leadForm #email").val().lastIndexOf("@") > 0) {
+          if (($("#leadForm #email").val().lastIndexOf("@") < $("#leadForm #email").val().length)) {
+            hideEmailDomains();
+          } else {
+            showEmailDomains();
+          }
+        } else {
+          showEmailDomains();
+        }
+      });
+
+      $("#leadForm #fone").on('change', function() {
+        mascara('(##) #### - #####', this, event, true);
+        if ($("#leadForm #fone").val().charAt(5) == 9) {
+          mascara('(##) # #### - ####', this, event, true);
+        }
+      });
 
       $(".btnstart").click(function() {
         scrollToSection("lead");
+        $("body").addClass("slide");
       });
-
 
       $("form#leadForm").submit(function(e) {
         e.preventDefault();
+        saveLead();
         scrollToSection("game");
         newTurn();
       });
 
+      $("li.emailoption").click(function(e) {
+        selectEmailDomain(this.innerText);
+      });
+
+      $(window).scroll(function() {
+        $('header').stop(true, true).hide().fadeIn('fast');
+      });
+
+      window.onwheel = function() {
+        return false;
+      }
+
+      showTecladoCompleto();
+      scrollToSection("home");
     }
   </script>
 

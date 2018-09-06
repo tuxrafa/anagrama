@@ -1,10 +1,25 @@
+/* geral */
+
 body {
   background: url("../img/background.jpeg") 50% 0;
   font-size: 20px;
   margin: 0;
   padding: 0;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@-webkit-keyframes slide {
+  from {
+    background-position: 50% 0;
+  }
+  to {
+    background-position: -540px 0;
+  }
+}
+
+body.slide {
+  -webkit-animation: slide 30s linear infinite;
 }
 
 header {
@@ -24,56 +39,15 @@ section {
   margin: auto;
 }
 
-section#home {
-  text-align: center;
-  box-shadow: 0px 1000px 50px 1px rgb(0, 0, 0), 0px 1000px 1500px 50px rgb(0, 0, 0);
-}
-
-
-section#result {
-  text-align: center;
-  box-shadow: 0px -1000px 50px 1px rgb(0, 0, 0), 0px -1000px 1500px 50px rgb(0, 0, 0);
-}
-
-.final.noob.hide, .final.gamer.hide, .final.hard.hide {
-  display: none;
-}
-
-.keyboard .key {
-  width: 51px;
-  height: 68px;
-  font-size: 20px;
-  margin: 20px 10px 0 0;
-  border: 0 none;
-  outline: 0 none;
-  background: url("../img/key-letter.png") no-repeat;
-}
-
-#letterboard .key {
-  width: 117px;
-  height: 152px;
-  font-size: 20px;
-  margin: 20px 10px 0 0;
-  border: 0 none;
-  outline: 0 none;
-  background: url("../img/key-game.png") no-repeat;
-}
-
 .key.active:active {
   opacity: 0.8;
   border: 1px solid transparent;
-}
-
-.letter.show {
-  background: green;
-}
-
-.letter.hide {
-  background: red;
+  box-shadow: inset 2px 5px 20px 4px rgba(0, 0, 0, 0.5);
+  color: #ffffffb8;
 }
 
 button.key {
-  opacity: 0.5;
+  opacity: 0.3;
   color: white;
   text-transform: uppercase;
 }
@@ -82,32 +56,227 @@ button.key.active {
   opacity: 1;
 }
 
+/* home */
+
+section#home {
+  text-align: center;
+  box-shadow: 0px 1000px 50px 1px rgb(0, 0, 0), 0px 1000px 1500px 50px rgb(0, 0, 0);
+}
+
+img.gamelogo {
+  margin: 144px auto -201px auto;
+}
+
+img.btnstart {
+  margin: 0 auto 0 auto;
+  cursor: pointer;
+}
+
+img.btnstart:active {
+  opacity: 0.8;
+  border: 0px solid transparent;
+  box-shadow: inset 2px 5px 20px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* lead */
+
+#lead h2 {
+  font-family: "Roboto Condensed", sans-serif;
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 72px;
+  max-width: 650px;
+  margin: 69px auto 0;
+  line-height: 71px;
+  color: white;
+  letter-spacing: 0.6px;
+}
+
+.keyboard {
+  width: 842px;
+  height: 406px;
+  margin: auto;
+  background: url("../img/keyboard.png") no-repeat;
+  margin: 58px auto 0 auto;
+  padding: 45px 0 0 78px;
+}
+
+.keyboard .key {
+  width: 51px;
+  height: 68px;
+  font-size: 34px;
+  margin: 10px 8px -5px -1px;
+  border: 0 none;
+  outline: 0 none;
+  background: url("../img/key-letter.png") no-repeat;
+  font-family: "Roboto Condensed";
+  font-weight: bold;
+  cursor: pointer;
+}
+
+form#leadForm {
+  margin: 62px auto 0 auto;
+  max-width: 764px;
+}
+
+form#leadForm input[type="checkbox"], form#leadForm input[type="radio"] {
+  display: none;
+}
+
+form#leadForm input[type="radio"]+label {
+  background: url("../img/radio.png") no-repeat;
+  width: auto;
+  height: 43px;
+  display: inline-block;
+  padding: 3px 0 0 63px;
+  font-family: "Roboto Condensed", sans-serif;
+  color: white;
+  font-size: 32px;
+  text-transform: uppercase;
+  font-weight: bold;
+  letter-spacing: -0.5px;
+  margin-left: 1px;
+}
+
+form#leadForm input[type="radio"]:checked+label {
+  background: url("../img/radio-checked.png") 0 0 no-repeat;
+}
+
+form#leadForm input[type="checkbox"]+label {
+  background: url("../img/checkbox.png") no-repeat;
+  width: auto;
+  height: 43px;
+  display: inline-block;
+  padding: 4px 0 0 58px;
+  font-family: "Roboto Condensed", sans-serif;
+  color: white;
+  font-size: 20px;
+  font-weight: 300;
+  letter-spacing: -0.5px;
+  margin-left: 1px;
+  margin: 49px 0 0 96px;
+}
+
+form#leadForm input[type="checkbox"]:checked+label {
+  background: url("../img/checkbox-checked.png") 0 0 no-repeat;
+}
+
+label#lblmaior18 {
+  float: left;
+}
+
+label#lblmenor18 {
+  float: right;
+  margin-right: 14px;
+}
+
+form#leadForm input.field {
+  width: 684px;
+  margin: 0 auto 24px;
+  border: 3px solid #002e40;
+  background: #000f16;
+  color: white;
+  height: 60px;
+  font-size: 30px;
+  padding: 19px 38px;
+  font-family: "Roboto Condensed";
+  text-transform: uppercase;
+  font-weight: 300;
+  outline: 0 none;
+}
+
+form#leadForm input.field:focus {
+  border: 3px solid #66c2f3;
+  box-shadow: 0 0px 50px 1px rgba(255, 255, 255, 0.2);
+}
+
+form#leadForm input.btn.btn-primary.btn-submit {
+  background: url("../img/start.png") no-repeat;
+  height: 130px;
+  padding: 0 !important;
+  border: 0 none;
+  width: 760px;
+  margin: 53px auto 0 auto;
+  outline: 0 none;
+}
+
+form#leadForm input.btn.btn-primary.btn-submit:active {
+  opacity: 0.8;
+  border: 0px solid transparent;
+  box-shadow: inset 2px 5px 20px 4px rgba(0, 0, 0, 0.5);
+}
+
+form#leadForm img.vocee {
+  margin: -16px auto -10px auto;
+  display: block;
+}
+
+.emailhelper.hide {
+  display: none;
+}
+
+.emailhelper.show ul {
+  position: absolute;
+  background: #002432;
+  width: 760px;
+  margin-top: -565px;
+  margin-left: 158px;
+  padding: 0;
+  border: 3px solid #002d40;
+  border-bottom: 0 solid #002d40;
+}
+
+.emailhelper.show ul li {
+  border-bottom: 3px solid #002d40;
+  list-style: none;
+  padding: 26px 0 37px 36px;
+  color: white;
+  font-size: 30px;
+  font-family: "Roboto Condensed";
+  text-transform: uppercase;
+  font-weight: 300;
+}
+
+.emailhelper.show ul li:hover {
+  background: #002d40;
+  cursor: pointer;
+}
+
+div#keyboard {
+  width: 600px;
+  float: left;
+}
+
 button.key#key-space, button.key#key-backspace {
   width: auto;
-  important;
 }
 
-#score {
-  height: 50px;
+button#key-space {
+  width: 457px !important;
+  background: url("../img/key-space.png") no-repeat;
+  margin: 12px 56px 0 56px;
 }
 
-#score #rights {
-  border: 1px solid darkgreen;
-  color: darkgreen;
-  width: 50px;
-  height: 50px;
-  float: right;
-  font-size: 20px;
+div#keypad {
+  width: 200px;
+  float: left;
 }
 
-#score #wrongs {
-  border: 1px solid red;
-  color: red;
-  width: 50px;
-  height: 50px;
-  float: right;
-  margin-right: 10px;
-  font-size: 20px;
+button#key-backspace {
+  width: 109px !important;
+  background: url("../img/backspace.png") no-repeat;
+  position: absolute;
+}
+
+/* game */
+
+section#game {
+  text-align: center;
+  color: white;
+}
+
+img.info {
+  margin: 4px 0 0 0;
 }
 
 @keyframes pulse {
@@ -122,15 +291,6 @@ button.key#key-space, button.key#key-backspace {
   }
 }
 
-#numberCountdown {
-    text-align: center;
-    margin-top: 56px;
-    color: #fff;
-    font-size: 1.0em;
-    font-family: sans-serif;
-    text-transform: uppercase;
-}
-
 .pulse {
   animation-name: pulse;
   animation-duration: 1s;
@@ -138,47 +298,154 @@ button.key#key-space, button.key#key-backspace {
   animation-iteration-count: infinite;
 }
 
-img.gamelogo {
-    margin: 144px auto -201px auto;
+#level {
+  background: url("../img/big-ribbon.png") 50% 50% no-repeat;
+  width: 636px;
+  height: 258px;
+  margin: -11px auto 0 auto;
+  line-height: 270px;
+  font-family: "Roboto Condensed", sans-serif;
+  font-size: 68px;
+  text-transform: uppercase;
+  font-weight: bold;
+  text-align: center;
+  padding-left: 10px;
 }
 
-img.btnstart {
-    margin: 0 auto 0 auto;
+div#quote {
+  font-family: "Roboto Condensed", sans-serif;
+  font-size: 57px;
+  font-style: italic;
+  line-height: 70px;
+  height: 460px;
+  margin: 30px 30px 0 30px;
+  font-weight: lighter;
 }
 
-h2 {
-    font-family: "Roboto Condensed", sans-serif;
-    text-align: center;
-    text-transform: uppercase;
-    font-size: 72px;
-    max-width: 650px;
-    margin: 69px auto 0;
-    line-height: 71px;
-    color: white;
-    letter-spacing: 0.6px;
-}
-form#leadForm input {
-    width: 684px;
-    margin: 0 auto 24px;
-    border: 3px solid #002e40;
-    background: #000f16;
-    color: white;
-    height: 60px;
-    font-size: 30px;
-    padding: 19px 38px;
-    font-family: "Roboto Condensed";
-    text-transform: uppercase;
-    font-weight: 300;
-    outline: 0 none;
+.hiddenWord {
+  text-transform: uppercase;
+  font-size: 90px;
+  font-weight: bold;
+  font-style: normal;
+  color: #eb008c;
+  margin: 30px 0 30px 0px;
 }
 
-form#leadForm input:focus {
-    border: 3px solid #66c2f3;
-    box-shadow: 0 0px 50px 1px rgba(255, 255, 255, 0.2);
+div#quote .letter.show {
+  opacity: 1;
 }
 
-form#leadForm {
-    margin: 62px auto 0 auto;
-    max-width: 764px;
-    /* background: red; */
+div#quote .letter.hide {
+  opacity: 0;
+}
+
+div#quote .letterPlace {
+  border-bottom: 5px solid #eb008c;
+  margin: 0 5px;
+  width: 1em;
+  display: inline-block;
+  padding: 5px;
+}
+
+div#title {
+  font-family: "Roboto Condensed", sans-serif;
+  text-transform: uppercase;
+  font-weight: bold;
+  opacity: 0.8;
+  font-size: 24px;
+}
+
+div#producer {
+  font-family: "Roboto Condensed", sans-serif;
+  opacity: 0.8;
+  font-size: 20px;
+}
+
+#score {
+  height: 70px;
+  float: right;
+  margin: 90px 158px 0 0;
+  padding: 0 0 0 72px;
+}
+
+#score #rights {
+  height: 70px;
+  float: left;
+  font-weight: bold;
+  color: #fff;
+  font-size: 60px;
+  font-family: "Roboto Condensed", sans-serif;
+  padding-left: 70px;
+  background: url("../img/right.png") 0 50% no-repeat;
+  padding-right: 30px;
+  border-right: 1px solid #082139;
+  margin-right: 30px;
+}
+
+#score #wrongs {
+  height: 70px;
+  float: right;
+  font-weight: bold;
+  color: #fff;
+  font-size: 60px;
+  font-family: "Roboto Condensed", sans-serif;
+  padding-left: 70px;
+  background: url("../img/wrong.png") 0 50% no-repeat;
+}
+
+#numberCountdown {
+  float: left;
+  font-weight: bold;
+  color: #fff;
+  font-size: 60px;
+  font-family: "Roboto Condensed", sans-serif;
+  margin: 90px 0 0 158px;
+  padding: 0 0 0 72px;
+  background: url("../img/hourglass.png") 0 50% no-repeat;
+}
+
+#letterboard {
+  background: url(../img/letterboard.png) 50% no-repeat;
+  width: 701px;
+  height: 415px;
+  margin: 49px auto 0 auto;
+  padding: 77px 30px 0 30px;
+}
+
+#letterboard .key {
+  width: 117px;
+  height: 152px;
+  font-size: 20px;
+  margin: 20px 10px 0 10px;
+  border: 0 none;
+  outline: 0 none;
+  background: url("../img/key-game.png") no-repeat;
+  cursor: pointer;
+  font-family: "Roboto Condensed", sans-serif;
+  font-size: 110px;
+  font-weight: bold;
+}
+
+/* success */
+
+section#result {
+  text-align: center;
+  box-shadow: 0px -1000px 50px 1px rgb(0, 0, 0), 0px -1000px 1500px 50px rgb(0, 0, 0);
+}
+
+.final.noob.hide, .final.gamer.hide, .final.hard.hide {
+  display: none;
+}
+
+#result .final {
+  margin: 358px 0 0 -2px;
+}
+
+#result .final p.resultText {
+  font-weight: lighter;
+  color: #fff;
+  font-size: 51px;
+  font-family: "Roboto Condensed", sans-serif;
+  max-width: 70%;
+  margin: 105px auto 0 auto;
 }

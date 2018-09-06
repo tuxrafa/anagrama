@@ -38,9 +38,9 @@
   function hideWord(word, letters) {
     html = "";
     for (var i = 0; i < letters.length; i++) {
-      html += ' <span class="letter hide" id="letter' + i + '">' + letters.charAt(i) + '</span>';
+      html += '<span class="letterPlace"><span class="letter hide" id="letter' + i + '">' + letters.charAt(i) + '</span></span>';
     }
-    hiddenWord = word.replace(letters, html);
+    hiddenWord = "<div class='hiddenWord'>" + word.replace(letters, html) + "</div>";
     return hiddenWord;
   }
 
@@ -64,7 +64,9 @@
       rightKey(key);
       if ($(".letter.hide").length == 0) {
         isRight();
-        newTurn();
+        window.clearTimeout(counter);
+        $(".hiddenWord").addClass("pulse");
+        setTimeout(function(){ newTurn(); }, 3000);
       }
     }
   }
@@ -109,13 +111,17 @@
       numberCountdown.innerText = preNumber + gameTime;
       counter = setTimeout(function(){startCounter(gameTime)}, 1000);
     } else {
-      marcaErro();
+      isWrong();
       $("#numberCountdown").removeClass("pulse");
       newTurn();
     }
   }
 
-  function marcaErro() {
+  function showLevel() {
+    level.innerText = "Level "+turns;
+  }
+
+  function isWrong() {
     wrongAnswers++;
     wrongs.innerText = wrongAnswers;
   }
@@ -126,10 +132,12 @@
   }
 
   function newTurn() {
+    $(".hiddenWord").removeClass("pulse");
     if (turns < maxTurns) {
       turns++;
       prepareGame();
       gameStart();
+      showLevel();
     } else {
       gameOver();
     }
@@ -138,6 +146,7 @@
   function gameOver() {
     $("#letterboard button").removeClass("active").prop("disabled", true);
     scrollToSection("result");
+    $("body").removeClass("slide");
     switch (true) {
       case rightAnswers<3:
         $("#result .final.noob").removeClass("hide");
