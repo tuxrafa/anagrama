@@ -7,7 +7,7 @@
   var rightAnswers = 0;
   var wrongAnswers = 0;
   var maxTurns = 5;
-  var maxTime = 1;
+  var maxTime = 25;
   var fieldFocus = "nome";
 
   function randomQuote() {

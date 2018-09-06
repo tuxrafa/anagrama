@@ -87,35 +87,14 @@ function saveLeadRemote(data) {
 
 function saveLeadLocal(data) {
   leads = getLocalLeads();
-  leads = leads + ";" + JSON.stringify(data);
+  if (leads == null){
+    leads = JSON.stringify(data);
+  } else {
+    leads = leads + "," + JSON.stringify(data);
+  }
   localStorage.setItem('leads', leads);
 }
 
 function getLocalLeads() {
   return localStorage.getItem('leads');
-}
-
-
-function getLocalLeads() {
-  return localStorage.getItem('leads');
-}
-
-function exportLocalLeads() {
-  leads = getLocalLeads();
-
-  var data, filename, link;
-  var csv = leads
-  if (csv == null) return;
-
-  filename = 'export.txt';
-
-  if (!csv.match(/^data:text\/csv/i)) {
-    csv = 'data:text/csv;charset=utf-8,' + csv;
-  }
-  data = encodeURI(csv);
-
-  link = document.createElement('a');
-  link.setAttribute('href', data);
-  link.setAttribute('download', filename);
-  link.click();
 }
