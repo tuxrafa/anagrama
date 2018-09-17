@@ -453,3 +453,11 @@ section#result {
 section#result img.restart {
     margin-top: 150px;
 }
+
+span.minusTime {
+    position: absolute;
+    font-size: 40px;
+    margin-top: -60px;
+    margin-left: -60px;
+    color: #ed008c;
+}

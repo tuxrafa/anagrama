@@ -1,14 +1,18 @@
 /* Você Perdeu */
-  //Globals
-  var word;
-  var counter;
-  var usedQuotes = [];
-  var turns = 0;
-  var rightAnswers = 0;
-  var wrongAnswers = 0;
+  //Configs
+  var minusTime = 2;
   var maxTurns = 5;
   var maxTime = 25;
   var fieldFocus = "nome";
+
+  // Globals
+  var word;
+  var counter;
+  var usedQuotes = [];
+  var gameTime;
+  var turns = 0;
+  var rightAnswers = 0;
+  var wrongAnswers = 0;
 
   function randomQuote() {
     quotesCount = quotes.length;
@@ -68,6 +72,8 @@
         $(".hiddenWord").addClass("pulse");
         setTimeout(function(){ newTurn(); }, 3000);
       }
+    } else {
+      wrongKey(key);
     }
   }
 
@@ -75,6 +81,57 @@
     letterId = $(".letter.hide").attr('id');
     $("#" + letterId).removeClass("hide").addClass("show");
     $(key).removeClass("active").prop("disabled", true);
+  }
+
+  function wrongKey(key) {
+    showMinusTime(key);
+    removeTime();
+    console.log(key);
+  }
+
+  function showMinusTime(wrongKey) {
+    $(wrongKey).append('<span class="minusTime">-' + minusTime + 's</span>');
+    $("#" + wrongKey.id + " .minusTime").slideUp('slow', function() {
+        $("#" + wrongKey.id + " .minusTime").remove();
+      });
+  }
+
+  function showMinusTime(wrongKey) {
+    $(wrongKey).append('<span class="minusTime">-' + minusTime + 's</span>');
+    slideToUp($("#" + wrongKey.id + " .minusTime"));
+    setTimeout(function(){
+      $("#" + wrongKey.id + " .minusTime").fadeOut("slow", function() {
+          $("#" + wrongKey.id + " .minusTime").remove()
+      });
+    }, 600);
+  }
+
+function slideToUp(obj) {
+    var div = obj;
+
+    var height = div.css({
+        display: "inline-block"
+    }).height();
+
+    div.css({
+        overflow: "hidden",
+        marginTop: height,
+        height: 0
+    }).animate({
+        marginTop: 0,
+        height: height
+    }, 300, function () {
+        $(this).css({
+            display: "",
+            overflow: "",
+            height: "",
+            marginTop: ""
+        });
+    });
+}
+
+  function removeTime() {
+    startCounter(gameTime - minusTime);
   }
 
   function showData(quote) {
@@ -98,7 +155,8 @@
     makeVisual(quote, hiddenWord, word, quoteObj, shuffledLetters);
   }
 
-  function startCounter(gameTime) {
+  function startCounter(newTime) {
+    gameTime = newTime;
     window.clearTimeout(counter);
     if ((gameTime - 1) >= 0) {
       gameTime = gameTime - 1;
@@ -159,7 +217,6 @@
 
     }
   }
-
 
   function gameStart() {
     $("#letterboard button").click(function(event) {
