@@ -91,13 +91,6 @@
 
   function showMinusTime(wrongKey) {
     $(wrongKey).append('<span class="minusTime">-' + minusTime + 's</span>');
-    $("#" + wrongKey.id + " .minusTime").slideUp('slow', function() {
-        $("#" + wrongKey.id + " .minusTime").remove();
-      });
-  }
-
-  function showMinusTime(wrongKey) {
-    $(wrongKey).append('<span class="minusTime">-' + minusTime + 's</span>');
     slideToUp($("#" + wrongKey.id + " .minusTime"));
     setTimeout(function(){
       $("#" + wrongKey.id + " .minusTime").fadeOut("slow", function() {
