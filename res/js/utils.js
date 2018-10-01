@@ -86,15 +86,7 @@ function saveLeadRemote(data) {
 }
 
 function saveLeadLocal(data) {
-  leads = getLocalLeads();
-  if (leads == null){
-    leads = JSON.stringify(data);
-  } else {
-    leads = leads + "," + JSON.stringify(data);
-  }
-  localStorage.setItem('leads', leads);
-}
-
-function getLocalLeads() {
-  return localStorage.getItem('leads');
+  $.post("http://localhost/jogo_bgs/salvalead.php", data, function(data) {
+    console.log(data);
+  });
 }

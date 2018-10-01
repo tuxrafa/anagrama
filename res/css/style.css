@@ -7,7 +7,13 @@ body {
   padding: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  overflow: hidden; 
+  overflow: hidden;
+/* cursor: none; */
+/* user-select: none; */
+}
+
+img.logo {
+    width: 430px;
 }
 
 @-webkit-keyframes slide {
@@ -70,7 +76,7 @@ img.gamelogo {
 
 img.btnstart {
   margin: 0 auto 0 auto;
-  cursor: pointer;
+  cursor: none;
 }
 
 img.btnstart:active {
@@ -98,7 +104,7 @@ img.btnstart:active {
   height: 406px;
   margin: auto;
   background: url("../img/keyboard.png") no-repeat;
-  margin: 58px auto 0 auto;
+  margin: -920px auto 0 auto;
   padding: 45px 0 0 78px;
 }
 
@@ -112,7 +118,7 @@ img.btnstart:active {
   background: url("../img/key-letter.png") no-repeat;
   font-family: "Roboto Condensed";
   font-weight: bold;
-  cursor: pointer;
+  cursor: none;
 }
 
 form#leadForm {
@@ -208,7 +214,7 @@ form#leadForm input.btn.btn-primary.btn-submit:active {
 }
 
 form#leadForm img.vocee {
-  margin: -16px auto -10px auto;
+  margin: 400px auto -10px auto;
   display: block;
 }
 
@@ -220,11 +226,14 @@ form#leadForm img.vocee {
   position: absolute;
   background: #002432;
   width: 760px;
-  margin-top: -565px;
-  margin-left: 158px;
+  margin-top: -515px;
+  margin-left: -2px;
   padding: 0;
-  border: 3px solid #002d40;
-  border-bottom: 0 solid #002d40;
+  border: 8px solid #00080c;
+  border-top: 0 solid #002d40;
+  z-index: 99;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
 }
 
 .emailhelper.show ul li {
@@ -240,7 +249,7 @@ form#leadForm img.vocee {
 
 .emailhelper.show ul li:hover {
   background: #002d40;
-  cursor: pointer;
+  cursor: none;
 }
 
 div#keyboard {
@@ -421,7 +430,7 @@ div#producer {
   border: 0 none;
   outline: 0 none;
   background: url("../img/key-game.png") no-repeat;
-  cursor: pointer;
+  cursor: none;
   font-family: "Roboto Condensed", sans-serif;
   font-size: 110px;
   font-weight: bold;
@@ -449,6 +458,15 @@ section#result {
   font-family: "Roboto Condensed", sans-serif;
   max-width: 70%;
   margin: 105px auto 0 auto;
+}
+
+#result .final.hard img {
+    margin-bottom: -300px;
+}
+
+#result .final.hard p.resultText {
+    margin-top: 60px;
+    margin-bottom: -40px;
 }
 
 section#result img.restart {
