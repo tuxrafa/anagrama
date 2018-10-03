@@ -18,6 +18,7 @@ function showTecladoCompleto() {
         $("#" + fieldFocus).trigger('change');
     }
     $("#" + fieldFocus).focus();
+    playSound("tecla");
   });
 }
 
@@ -89,4 +90,11 @@ function saveLeadLocal(data) {
   $.post("http://localhost/jogo_bgs/salvalead.php", data, function(data) {
     console.log(data);
   });
+}
+
+function playSound(sound) {
+  var soundEffect = new Audio('res/sounds/'+sound+'.wav');
+  soundEffect.loop = false;
+  soundEffect.volume = 1;
+  soundEffect.play();
 }

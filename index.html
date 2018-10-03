@@ -132,6 +132,11 @@
       $(".btnstart").click(function() {
         scrollToSection("lead");
         $("body").addClass("slide");
+  
+        var bgSound = new Audio('res/sounds/bg.mp3');
+        bgSound.loop = true;
+        bgSound.volume = 0.2;
+        bgSound.play();
       });
 
       $("form#leadForm").submit(function(e) {
@@ -155,6 +160,7 @@
 
       showTecladoCompleto();
       scrollToSection("home");
+
     }
   </script>
 

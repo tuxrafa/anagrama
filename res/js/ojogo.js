@@ -81,12 +81,13 @@
     letterId = $(".letter.hide").attr('id');
     $("#" + letterId).removeClass("hide").addClass("show");
     $(key).removeClass("active").prop("disabled", true);
+    playSound("acerto");
   }
 
   function wrongKey(key) {
     showMinusTime(key);
     removeTime();
-    console.log(key);
+    playSound("erro");
   }
 
   function showMinusTime(wrongKey) {
@@ -173,6 +174,7 @@ function slideToUp(obj) {
   }
 
   function isWrong() {
+    playSound("perdeu");
     wrongAnswers++;
     wrongs.innerText = wrongAnswers;
   }
@@ -197,6 +199,7 @@ function slideToUp(obj) {
   function gameOver() {
     $("#letterboard button").removeClass("active").prop("disabled", true);
     scrollToSection("result");
+    playSound("success");
     $("body").removeClass("slide");
     switch (true) {
       case rightAnswers<3:
